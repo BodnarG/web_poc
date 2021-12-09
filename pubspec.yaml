@@ -12,19 +12,26 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
+  path_provider: ^2.0.7
+  intl: ^0.17.0  # to format dates in the expense_tracker example
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  hive: ^2.0.4
-  hive_flutter: ^1.1.0
-  path_provider: ^2.0.7
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+  hive_generator:
+    git:
+      url: git://github.com/hivedb/hive.git
+      path: hive_generator
+  build_runner: ^1.10.0
 
 flutter:
   uses-material-design: true
