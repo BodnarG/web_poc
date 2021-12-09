@@ -24,7 +24,7 @@ class _TransactionPageState extends State<TransactionPage> {
 
   @override
   void dispose() {
-    Hive.close(); // With the current implementation if I refresh the page, the box will be closed on dispose() but won't be reopened so the Hive.box<..>(...) will throw an exception
+    Boxes.getTransactions().close(); // With the current implementation if I refresh the page, the box will be closed on dispose() but won't be reopened so the Hive.box<..>(...) will throw an exception
     super.dispose();
   }
 
