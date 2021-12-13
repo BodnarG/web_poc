@@ -23,23 +23,24 @@ class PocSelector extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
-          TextButton(onPressed: () => Hive.close().then((value) => Utils.showSnackBar(
-                  context: context,
-                  text: 'The call for Hive.close() has ended'),
-                  ),
-              child: const Text('Close Hive Boxes', style: TextStyle(color: Colors.white),)),
-          // IconButton(
-          //     onPressed: () {
-          //       debugPrint('Hive.deleteFromDisk() will be called');
-          //       Hive.deleteFromDisk().then((_) {
-          //         Utils.showSnackBar(
-          //             context: context,
-          //             text: 'The call for Hive.deleteFromDisk() has ended.');
-          //         debugPrint('The call for Hive.deleteFromDisk() has ended.');
-          //       });
-          //     },
-          //     icon: const Icon(Icons.delete),
-          //     tooltip: 'Delete all Hive boxes'),
+          TextButton(
+            onPressed: () => Hive.close().then(
+              (value) => Utils.showSnackBar(
+                context: context,
+                text: 'The call for Hive.close() has ended'),
+                ),
+              child: const Text('Close Hive Boxes', style: TextStyle(color: Colors.white),
+              ),
+          ),
+          TextButton(
+            onPressed: () => Hive.deleteFromDisk().then(
+              (value) => Utils.showSnackBar(
+                context: context,
+                text: 'The call for Hive.deleteFromDisk() has ended.'),
+                ),
+              child: const Text('Call Hive.deleteFromDisk()', style: TextStyle(color: Colors.white),
+              ),
+          ),
         ],
       ),
       body: getListView(),
@@ -55,9 +56,12 @@ class PocSelector extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, listItems[index]);
             },
-            onLongPress: () => Utils.showSnackBar(
-                context: context,
-                text: 'Is ${listItems[index]} box open >> ${Hive.isBoxOpen(listItems[index])}'),
+            onLongPress: () async {
+              bool isExist = await Hive.boxExists(listItems[index]);
+              return Utils.showSnackBar(
+                  context: context,
+                  text: 'Is ${listItems[index]} box exists and open? >>  is exist: $isExist, is open: ${Hive.isBoxOpen(listItems[index])}');
+            },
             child: Text(listItems[index]));
       },
       separatorBuilder: (context, index) => const Divider(height: 20),
